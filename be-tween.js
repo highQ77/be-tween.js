@@ -97,6 +97,7 @@ export default class BeTween {
             times--
         }
         this._onCompleteFunc()
+        this._obj.wrapper.remove()
     }
 
     async loop() {
