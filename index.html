@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be-Tween.js</title>
+    <link rel="stylesheet" href="./all-in-one.css">
+    <style>
+        body {
+            margin: 0px;
+            color: tomato;
+            background-color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="oc-area-limit">
+        <h1>Be-Tween.js</h1>
+        <h4>power by css-animation</h4>
+        <div class="oc-fs-12 oc-right">Author - William77</div>
+        <hr class="oc-my-16">
+        <textarea id="demoCode" class="oc-w-100 oc-overflow-hidden oc-text-c60 oc-p-8 oc-fs-12 oc-ol-0"
+            style="background-color: #444;">
+            const node = document.createElement('div')
+            node.style.position = 'absolute'
+            node.style.width = '100px'
+            node.style.height = '100px'
+            node.style.background = 'black'
+            node.style.pointerEvents = 'none'
+            document.body.append(node)
+
+            BeTween.get(node, () => { console.log('compelte'); node.remove() })
+                .set({ left: '0px', top: '0px', transform: 'scale(1) rotate(45deg)', opacity:'1' })
+                .call(() => console.log('set done!'))
+                .to({ left: '500px', top: '500px', background: 'yellow' }, 1000, BeTween.func_ease_in_out)
+                .call(() => console.log('to done!'))
+                .wait(1000)
+                .call(() => console.log('wait done!'))
+                .to({ left: '200px', top: '500px', transform: 'scale(2)', background: '#333', opacity:'0' }, 1000,  BeTween.func_ease_out)
+                .call(() => console.log('final to done!'))
+                .start(3)
+        </textarea>
+        <div><button class="oc-text-c60 oc-bg-c30 oc-bd-1 oc-bdb-3 oc-bd-c10 oc-px-32 oc-py-4 oc-bd-radius-8 oc-mr-4"
+                onclick="tweenNode()">PLAY</button>
+        </div>
+        <div class="oc-my-8 ">
+            <div class="oc-area oc-mt-4">
+                <div>BeTween.get(HTMLElement, compelteFunc?):BeTween</div>
+                <div>選取要成為動畫的物件</div>
+            </div>
+            <div class="oc-area oc-mt-4">
+                <div>set(HTMLElement style properties):BeTween</div>
+                <div>一開始的設定，HTMLElement 的 style 屬性皆可</div>
+            </div>
+            <div class="oc-area oc-mt-4">
+                <div>call(any function):BeTween</div>
+                <div>任意函式被呼叫</div>
+            </div>
+            <div class="oc-area oc-mt-4">
+                <div>wait(time-millisecond):BeTween</div>
+                <div>停止的時間</div>
+            </div>
+            <div class="oc-area oc-mt-4">
+                <div>to(HTMLElement style properties, time, ease):BeTween</div>
+                <div>目標設定，HTMLElement 的 style 屬性皆可，time為完成時間，ease為動畫函式</div>
+            </div>
+            <div class="oc-area oc-mt-4">
+                <div>start(animation times):void</div>
+                <div>函式鏈最後串接點，啟動動畫，times 為 0 以上數值，即播放次數</div>
+            </div>
+            <div class="oc-area oc-mt-4">
+                <div>loop():void</div>
+                <div>函式鏈最後串接點，啟動無限次數動畫，通常可在 start 或 loop 做選擇</div>
+            </div>
+            <div class="oc-area oc-mt-4">
+                <div>pause():void</div>
+                <div>const bt = BeTween.get(node), bt.pause(); 動畫暫停</div>
+            </div>
+            <div class="oc-area oc-mt-4">
+                <div>resume():void</div>
+                <div>const bt = BeTween.get(node), bt.resume(); 動畫恢復播放</div>
+            </div>
+            <div class="oc-area oc-mt-4">
+                <div>remove():void</div>
+                <div>const bt = BeTween.get(node), bt.remove(); 釋放動畫物件</div>
+            </div>
+        </div>
+
+    </div>
+    <script type="module">
+        import BeTween from './be-tween.js'
+
+        window.tweenNode = function () {
+            const v = document.getElementById('demoCode').value
+            eval(v)
+        }
+    </script>
+    <script>
+        // [ Format Textarea ] ===============================================================
+        let winResize = () => {
+            ;[...document.getElementsByTagName('textarea')].forEach(tt => {
+                let s = tt.value.trimEnd().indexOf('const')
+                let t = tt.value.split('\n').map(item => item.slice(s)).filter(item => item != '')
+                tt.style.height = 0
+                tt.style.height = tt.scrollHeight + 'px'
+                tt.value = t.join('\n')
+                tt.style.overflow = 'scroll'
+            })
+        }
+        winResize()
+        window.addEventListener('resize', winResize)
+        window.addEventListener('DOMContentLoaded', winResize)
+    </script>
+</body>
+
+</html>
