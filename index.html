@@ -36,7 +36,7 @@
             node.style.boxShadow = '0 0 10px #111'
             node.innerText = 'Be-Tween.js'
             document.body.append(node)
-            BeTween.get(node, () => { console.log('compelete'); node.remove() })
+            BeTween.get(node, () => { console.log('complete'); node.remove() })
                 .set({ left: '0px', top: '0px', transform: 'scale(1) rotateY(0deg)', opacity:'.9', background: 'brown' })
                 .call(() => console.log('set done!'))
                 .to({ left: '500px', top: '500px', transform: 'scale(1) rotateY(360deg)', background: 'potato' }, 1000, BeTween.func_ease_in_out)
