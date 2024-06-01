@@ -16,7 +16,7 @@
     </style>
 </head>
 
-<body>
+<body style="transform:perspective(400px) rotateX(2deg) translate(0, -40px) scale(1, .85);">
     <div class="oc-area-limit">
         <h1>Be-Tween.js</h1>
         <h4>power by css-animation</h4>
@@ -28,14 +28,18 @@
             node.style.position = 'absolute'
             node.style.width = '100px'
             node.style.height = '100px'
-            node.style.background = 'black'
             node.style.pointerEvents = 'none'
+            node.style.color = 'potato'
+            node.style.textAlign = 'center'
+            node.style.lineHeight = '100px'
+            node.style.outline = '3px solid red'
+            node.style.boxShadow = '0 0 10px #111'
+            node.innerText = 'Be-Tween.js'
             document.body.append(node)
-
             BeTween.get(node, () => { console.log('compelte'); node.remove() })
-                .set({ left: '0px', top: '0px', transform: 'scale(1) rotate(45deg)', opacity:'1' })
+                .set({ left: '0px', top: '0px', transform: 'scale(1) rotateY(0deg)', opacity:'.9', background: 'brown' })
                 .call(() => console.log('set done!'))
-                .to({ left: '500px', top: '500px', background: 'yellow' }, 1000, BeTween.func_ease_in_out)
+                .to({ left: '500px', top: '500px', transform: 'scale(1) rotateY(360deg)', background: 'potato' }, 1000, BeTween.func_ease_in_out)
                 .call(() => console.log('to done!'))
                 .wait(1000)
                 .call(() => console.log('wait done!'))
